@@ -22,7 +22,6 @@ public class Player : MonoBehaviour
         sangueTela.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
         float InputX = Input.GetAxis("Horizontal");

@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public Transform player;
-    public float alturaCamera = 1.3f;
+    public float alturaCamera = 1.43f;
     public float Sensibilidade = 300.0f;
     public float limiteRotacao = 45.0f;
     float rotX;
