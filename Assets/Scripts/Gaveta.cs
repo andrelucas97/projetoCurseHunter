@@ -4,17 +4,26 @@ using UnityEngine;
 
 public class Gaveta : MonoBehaviour
 {
+    public static bool pegueiPorta = false;
 
     private GameObject player;
     private Animator gavetaAbrir;
 
+    public GameObject chavePorta;
 
+    public GameObject mensagemTeste;
+
+
+    public GameObject mensagemChave;
     public GameObject mensagemGaveta; // abrir cadeado
     public GameObject mensagemGavetaTrancada; // gaveta trancada
     public GameObject cadeadoObjeto; // objeto cadeado
     public GameObject mensagemAbrirGaveta; // abrir gaveta
-    
+    public GameObject mensagemChaveAdicionadoPorta;
 
+    public bool gavetaAberta = false;
+    public bool chavePeguei = false;
+    public bool pegarChave = false;
 
     void Start()
     {
@@ -25,27 +34,74 @@ public class Gaveta : MonoBehaviour
 
     void Update()
     {
-        if (Vector3.Distance(transform.position, player.transform.position) < 1.5f){
-            if (PlayerChave.peguei == true){
-                mensagemGaveta.SetActive(true);
-                if (Input.GetKey(KeyCode.E)){
-                    Destroy(cadeadoObjeto);
-                    mensagemGaveta.SetActive(false);
-                    gavetaAbrir.enabled = true;
+        if (Vector3.Distance(transform.position, player.transform.position) < 1.5f)
+        {
+            if (PlayerChave.peguei == true)
+            {
+                if (cadeadoObjeto == true){
+                    mensagemGaveta.SetActive(true);
+                    }
 
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    if (!gavetaAberta)
+                    {
+                        Destroy(cadeadoObjeto);
+                        mensagemGaveta.SetActive(false);
+                        gavetaAbrir.enabled = true;
+                        gavetaAberta = true;
+                        StartCoroutine(tempoPegarChave(0.5f));
+
+                    }
 
 
                 }
-            }
 
-            else {
+                if (gavetaAberta && (chavePeguei == false) && pegarChave)
+                    {
+                        if (Vector3.Distance(transform.position, chavePorta.transform.position) < 1.5f)
+                        {
+                            mensagemChave.SetActive(true);
+
+                            if (Input.GetKeyDown(KeyCode.E))
+                            {
+                                pegueiPorta = true;
+                                chavePeguei = true;
+                                Destroy(chavePorta);
+                                mensagemChave.SetActive(false);
+                                StartCoroutine(ShowAndHideMessage(2.0f));
+                            }
+                        }
+                        else
+                        {
+                            mensagemChave.SetActive(false);
+                        }
+                    }
+            }
+            else
+            {
                 mensagemGavetaTrancada.SetActive(true);
             }
         }
-
-        else {
+        else
+        {
             mensagemGaveta.SetActive(false);
             mensagemGavetaTrancada.SetActive(false);
+            //mensagemChave.SetActive(false);
+
         }
+    }
+
+    IEnumerator ShowAndHideMessage(float duration)
+    {
+        mensagemChaveAdicionadoPorta.SetActive(true);
+        yield return new WaitForSeconds(duration);
+        mensagemChaveAdicionadoPorta.SetActive(false);
+    }
+
+    IEnumerator tempoPegarChave(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        pegarChave = true;
     }
 }

@@ -6,11 +6,14 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
 
-    public int vidaPlayer = 100;
+    public int vidaPlayer = 1;
     public float velocidadeCorrida = 5;
     public float velocidadeAndar = 3;
     public Camera cameraPlayer;
     public GameObject sangueTela;
+    public GameObject iconCrucifixo;
+
+    public GameObject mensagemMorte;
 
     private float velocidadePlayer;
     private Vector3 direcoes;
@@ -20,6 +23,7 @@ public class Player : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         sangueTela.SetActive(false);
+        iconCrucifixo.SetActive(false);
     }
 
     void Update()
@@ -54,20 +58,25 @@ public class Player : MonoBehaviour
 
         if (vidaPlayer <= 0){
             velocidadePlayer = 0;
-            StartCoroutine("morte");
+            mensagemMorte.SetActive(true);
+            //StartCoroutine("morte");
 
+        }
+
+        if (PlayerCruc.pegueiCruc == true){
+            iconCrucifixo.SetActive(true);
         }
     }
 
     void OnTriggerEnter(Collider collider){
         if(collider.gameObject.tag == "maoInimigo"){
-            vidaPlayer -= 40;
+            vidaPlayer -= 1;
             sangueTela.SetActive(true);
         }
     }
 
-    IEnumerator morte(){
-        yield return new WaitForSeconds(4.0f);
-        SceneManager.LoadScene("GameOver");
-    }
+    //IEnumerator morte(){
+    //    yield return new WaitForSeconds(4.0f);
+    //    SceneManager.LoadScene("GameOver");
+    //}
 }

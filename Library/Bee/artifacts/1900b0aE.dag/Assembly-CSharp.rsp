@@ -367,12 +367,20 @@
 "Assets/Items/FurnishedCabin/Scripts/MoveObjectController.cs"
 "Assets/Items/FurnishedCabin/Scripts/Player/PlayerLook.cs"
 "Assets/Items/FurnishedCabin/Scripts/Player/PlayerMove.cs"
+"Assets/Items/Laterns and candles/scripts/CameraFacing.cs"
+"Assets/Items/Laterns and candles/scripts/ExtendedFlycam.cs"
+"Assets/Items/Rusty Flashlight/Scripts/FlashlightToggle.cs"
 "Assets/Scripts/armarioCozinha.cs"
 "Assets/Scripts/CameraController.cs"
+"Assets/Scripts/FimGame.cs"
 "Assets/Scripts/Gaveta.cs"
 "Assets/Scripts/Monster.cs"
+"Assets/Scripts/movPorta.cs"
 "Assets/Scripts/Player.cs"
 "Assets/Scripts/PlayerChave.cs"
+"Assets/Scripts/PlayerCruc.cs"
+"Assets/Scripts/PlayerPilhas.cs"
+"Assets/Scripts/trocaItens.cs"
 -langversion:9.0
 
 /deterministic

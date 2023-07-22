@@ -10,7 +10,6 @@ public class armarioCozinha : MonoBehaviour
 
     public GameObject mensagemAbrirArmario;
 
-
     void Start()
     {
         player = GameObject.FindWithTag("Player");
@@ -19,13 +18,14 @@ public class armarioCozinha : MonoBehaviour
 
     void Update()
     {
-        if (Vector3.Distance(transform.position, player.transform.position) < 0.9f){
+        if (Vector3.Distance(transform.position, player.transform.position) < 1.1f){
             mensagemAbrirArmario.SetActive(true);
 
             if (Input.GetKey(KeyCode.E)){
                 
                 mensagemAbrirArmario.SetActive(false);
                 armarioAbrir.enabled = true;
+                
             }
         } else {
             mensagemAbrirArmario.SetActive(false);
