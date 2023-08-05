@@ -11,6 +11,9 @@ public class FimGame : MonoBehaviour
     public GameObject mensagemGG;
     public GameObject mensagemPortaFechada;
 
+    [SerializeField] private AudioSource portaTrancadaAudioSource;
+    [SerializeField] private AudioClip portaTrancadaAudioClip;
+
 
     void Start()
     {
@@ -31,6 +34,11 @@ public class FimGame : MonoBehaviour
                 
             } else {
                 mensagemPortaFechada.SetActive(true);
+
+                if (Input.GetKeyDown(KeyCode.E)){
+                    portaTrancadaAudioSource.PlayOneShot(portaTrancadaAudioClip);
+                }
+
             }
         } else {
                 mensagemPortaFechada.SetActive(false);

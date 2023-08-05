@@ -4,7 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - maoInimigo
+  - Pilha1
+  - Pilha2
+  - Pilha3
+  - Pilha4
   layers:
   - Default
   - TransparentFX

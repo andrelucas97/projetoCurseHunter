@@ -10,6 +10,9 @@ public class movPorta : MonoBehaviour
 
     public GameObject mensagemPorta;
 
+    [SerializeField] private AudioSource portaAudioSource;
+    [SerializeField] private AudioClip portaAudioClip;  
+
     void Start()
     {
         player = GameObject.FindWithTag("Player");
@@ -24,7 +27,9 @@ public class movPorta : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E)){
 
                 mensagemPorta.SetActive(false);
-                portaAbrir.enabled = true;     
+                portaAbrir.enabled = true;
+                portaAudioSource.PlayOneShot(portaAudioClip);
+
 
             }
         } else {

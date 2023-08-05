@@ -13,6 +13,18 @@ public class Monster : MonoBehaviour
     public float velocidadeInimigo;
     private GameObject maoInimigo;
 
+    public GameObject somMonster;
+
+    [SerializeField] private AudioSource passosMonsterAudioSource;
+    [SerializeField] private AudioClip[] passosMonsterAudioClip;
+
+    [SerializeField] private AudioSource somMonsterAttackAudioSource;
+    [SerializeField] private AudioClip somMonsterAttackAudioClip;
+
+    [SerializeField] private AudioSource somMonsterAudioSource;
+    [SerializeField] private AudioClip somMonsterAudioClip;
+
+
     void Start()
     {
         animInimigo = GetComponent<Animator>();
@@ -21,6 +33,8 @@ public class Monster : MonoBehaviour
         maoInimigo = GameObject.FindWithTag("maoInimigo");
         navMesh.speed = velocidadeInimigo;
         maoInimigo.SetActive(false);
+
+        //somMonsterAudioSource.PlayOneShot(somMonsterAudioClip);
 
     }
 
@@ -33,7 +47,16 @@ public class Monster : MonoBehaviour
             navMesh.speed = 0;
             maoInimigo.SetActive(true);
             animInimigo.SetBool("attack", true);
+
+            somMonster.SetActive(false);
+
             StartCoroutine("ataque");
+            
+        } else {
+
+            StartCoroutine("tempoMonstro");            
+            
+
         }
     }
 
@@ -43,5 +66,19 @@ public class Monster : MonoBehaviour
         maoInimigo.SetActive(false);
 
         navMesh.speed = velocidadeInimigo;
+    }
+
+    private void PassosMonster(){
+        passosMonsterAudioSource.PlayOneShot(passosMonsterAudioClip[Random.Range(0, passosMonsterAudioClip.Length)]);
+    }
+
+    private void monsterAttack(){
+        somMonsterAttackAudioSource.PlayOneShot(somMonsterAttackAudioClip);
+
+    }
+
+    IEnumerator tempoMonstro(){
+        yield return new WaitForSeconds(2.0f);
+        somMonster.SetActive(true);
     }
 }

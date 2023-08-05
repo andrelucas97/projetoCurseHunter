@@ -25,6 +25,15 @@ public class Gaveta : MonoBehaviour
     public bool chavePeguei = false;
     public bool pegarChave = false;
 
+    [SerializeField] private AudioSource cadeadoAudioSource;
+    [SerializeField] private AudioClip cadeadoAudioClip;
+
+    [SerializeField] private AudioSource cadeadoAbrindoAudioSource;
+    [SerializeField] private AudioClip cadeadoAbrindoAudioClip;
+
+    [SerializeField] private AudioSource chavePortaAudioSource;
+    [SerializeField] private AudioClip chavePortaAudioClip;
+
     void Start()
     {
         player = GameObject.FindWithTag("Player");
@@ -46,6 +55,8 @@ public class Gaveta : MonoBehaviour
                 {
                     if (!gavetaAberta)
                     {
+                        cadeadoAbrindoAudioSource.PlayOneShot(cadeadoAbrindoAudioClip);
+
                         Destroy(cadeadoObjeto);
                         mensagemGaveta.SetActive(false);
                         gavetaAbrir.enabled = true;
@@ -67,6 +78,7 @@ public class Gaveta : MonoBehaviour
                             {
                                 pegueiPorta = true;
                                 chavePeguei = true;
+                                chavePortaAudioSource.PlayOneShot(chavePortaAudioClip);
                                 Destroy(chavePorta);
                                 mensagemChave.SetActive(false);
                                 StartCoroutine(ShowAndHideMessage(2.0f));
@@ -81,6 +93,11 @@ public class Gaveta : MonoBehaviour
             else
             {
                 mensagemGavetaTrancada.SetActive(true);
+
+                if (Input.GetKeyDown(KeyCode.E)){
+                    cadeadoAudioSource.PlayOneShot(cadeadoAudioClip);
+                }
+
             }
         }
         else
